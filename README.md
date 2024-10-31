@@ -4,7 +4,7 @@ This repo is used to make Synthv packages for Arch Linux because the AUR version
 (No, i will not make binary packages of it. You do it. )
 
 ## Content
-    synthv            - PKGBUILD Script for building Synth V Professional
+    synthv-studio     - PKGBUILD Script for building Synth V Professional
     svkey             - PKGBUILD Script for building YumeTool (may work?)
 ## Building Packages
 
