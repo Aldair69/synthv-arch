@@ -1,0 +1,35 @@
+# Courtesy from kharovtobi <https://github.com/kharovtobi>
+
+_pkgname=synthv-studio
+pkgname=$_pkgname-pro
+pkgver=1.9.0
+pkgrel=1
+pkgdesc="Synthesizer V Studio Professional by Dreamtonics"
+arch=("x86_64")
+url="https://dreamtonics.com/synthesizerv"
+license=(custom:dreamtonics)
+depends=("xdg-utils")
+optdepends=('svkey=2.1.0: tool to crack this package (BROKEN!)')
+provides=("synthv-studio" "sythv-studio-pro")
+conflicts=("synthv-studio-basic")
+source=("https://z.tess.eu.org/f/f8058ecac4e5ecab93bc4617f9dce8c8e0ebeddbfca517ca7a386dd6c67fd2a3.zip"
+        "synthv-studio.png"
+        "synthv-studio.desktop")
+sha256sums=("2c79f650425774dade0f130badd913e961c89f91b1df45e52905afd7ad8ca44e"
+        "f0f0180bbd5a029655089c5f8d5948c093622dd978e8aa6a4c47689b5936351b"
+        "SKIP")
+
+package() {
+    # Install Files
+    mkdir -p "$pkgdir/opt/synthv/"
+    mkdir -p "$pkgdir/usr/bin"
+    cp -rf $srcdir/Synthesizer\ V\ Studio\ Pro/* "$pkgdir/opt/synthv/"
+
+    # Install desktop entry and license
+    install -Dm644 "$pkgdir/opt/synthv/license-en.txt" "$pkgdir/usr/share/licenses/$_pkgname/LICENSE"
+    install -Dm644 "$srcdir/synthv-studio.png" "$pkgdir/usr/share/icons/hicolor/128x128/apps/synthv-studio.png"
+    install -Dm755 "$srcdir/synthv-studio.desktop" "$pkgdir/usr/share/applications/synthv-studio.desktop"
+
+    # Add link to /bin
+    ln -s "/opt/synthv/synthv-studio" "$pkgdir/usr/bin/$_pkgname"
+}
